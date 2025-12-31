@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lore</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(160deg, #6B4EFF, #8B6CFF);
+  font-family: 'Orbitron', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  position: relative;
+  width: 90%;
+  max-width: 380px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  padding: 25px;
+  border-radius: 20px;
+  color: #EDEAFF; /* semua teks default putih */
+  
+  /* fade-in default */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+
+.container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
+}
+
+.title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section {
+  margin-bottom: 18px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.section-title {
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #EDEAFF; /* judul section jadi putih */
+  margin-bottom: 6px;
+}
+
+.section p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #EDEAFF; /* isi paragraf jadi putih */
+}
+
+
+.quote {
+  margin-top: 20px;
+  padding-left: 12px;
+  border-left: 3px solid #3A2A7A;
+  font-size: 14px;
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.quote.visible {
+  opacity: 0.9;
+  transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="container">
+
+  <!-- Tombol balik ke profil -->
+  <a href="#" class="exit-btn" id="exitBtn"></a>
+  
+  <audio id="clickSound" src="https://raw.githubusercontent.com/AxionLabs-082/my-Labs/main/audio/klik3.mp3" preload="auto"></audio>
+
+  <div class="title" id="title">LORE</div>
+
+  <div class="section" id="section1">
+    <div class="section-title">ORIGIN:</div>
+    <p>
+      <i>Reze is a figure who appears with a warm smile,
+      but keeping their identity as a weapon for survival.
+      His past was shaped by manipulation, training,
+      and lies that make it difficult to distinguish
+      his true feelings and the role he had to play.</i>
+    </p>
+  </div>
+
+  <div class="section" id="section2">
+    <div class="section-title">MOTIVATION:</div>
+    <p>
+      <i>Behind her relaxed and flirtatious attitude, Reze wants
+      one simple thing: freedom.
+      The freedom to choose, to love, and to live without
+      being controlled by anyone.</i>
+    </p>
+  </div>
+
+  <div class="section" id="section3">
+    <div class="section-title">DARK SIDE :</div>
+    <p>
+      <i>When the situation demands it, Reze is capable of becoming
+      cold and deadly.
+      He can use feelings as weapons,
+      and emotional closeness is merely a tool
+      to achieve his goals.</i>
+    </p>
+  </div>
+
+  <div class="quote" id="quote">
+    "Not all smiles come from happiness."
+  </div>
+
+</div>
+
+<script>
+window.addEventListener('load', () => {
+  const container = document.getElementById('container');
+  const title = document.getElementById('title');
+  const sections = [
+    document.getElementById('section1'),
+    document.getElementById('section2'),
+    document.getElementById('section3'),
+    document.getElementById('quote')
+  ];
+
+  container.classList.add('visible');
+  title.classList.add('visible');
+
+  // fade-in bertahap tiap section
+  sections.forEach((sec, index) => {
+    setTimeout(() => {
+      sec.classList.add('visible');
+    }, 400 * (index + 1));
+  });
+});
+</script>
+
+<script>
+const exitBtn = document.getElementById("exitBtn");
+const clickSound = document.getElementById("clickSound");
+
+exitBtn.addEventListener("click", function(e) {
+  e.preventDefault(); // tahan pindah halaman
+
+  clickSound.currentTime = 0;
+  clickSound.play();
+
+  const url = this.getAttribute("href");
+
+  // delay dikit biar sound kedengeran
+  setTimeout(() => {
+    window.location.href = url;
+  }, 200);
+});
+</script>
+
+</body>
+</html>
